@@ -1,12 +1,27 @@
 <!doctype html>
-<html>
+<html ng-app="FirstAngular">
   <head>
     <meta charset="utf-8">
-    <title>Titre de la page</title>
+    <title>AngularJS</title>
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
     <script src="script.js"></script>
   </head>
-  <body>
+
+  <body ng-controller="MyController">
     <h1>Hello world !</h1>
+    
+    <p>
+      Bienvenue dans ta première application {{ user.name }} {{ user.lastName }}
+    </p>
   </body>
+
+  <script type="text/javascript">
+    function MyController($scope) {
+      $scope.user = { name: "Yannick", lastName: "Placerdat" };
+    }
+    
+    angular.module("FirstAngular", [])
+      .controller("MyController", MyController);
+  </script>
 </html>
