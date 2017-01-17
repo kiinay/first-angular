@@ -1,27 +1,41 @@
 <!doctype html>
-<html ng-app="FirstAngular">
+<html ng-app="FirstAngular" ng-controller="MainController">
   <head>
     <meta charset="utf-8">
-    <title>AngularJS</title>
+    <title>{{ title }}</title>
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
     <script src="script.js"></script>
   </head>
 
   <body ng-controller="MyController">
-    <h1>Hello world !</h1>
-    
-    <p>
-      Bienvenue dans ta première application {{ user.name }} {{ user.lastName }}
-    </p>
+    <div ng-controller="ChildController">
+      <h1>{{ title }}</h1>
+      <h2>{{ $parent.title }}</h2>
+
+      <p>
+        Bienvenue dans ta première application {{ user.name }} {{ user.lastName }}
+      </p>
+    </div>
   </body>
 
   <script type="text/javascript">
+    function MainController($scope) {
+      $scope.title = "Start Of AngularJS";
+    }
+
     function MyController($scope) {
       $scope.user = { name: "Yannick", lastName: "Placerdat" };
     }
-    
-    angular.module("FirstAngular", [])
-      .controller("MyController", MyController);
+
+    function ChildController($scope) {
+      $scope.title = "Hello world !";
+    }
+
+    var module = angular.module("FirstAngular", []);
+
+    module.controller("MainController", MainController);
+    module.controller("MyController", MyController);
+    module.controller("ChildController", ChildController);
   </script>
 </html>
